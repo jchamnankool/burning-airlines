@@ -6,7 +6,6 @@ class CreateFlights < ActiveRecord::Migration[5.2]
       t.text :to
       t.text :from
       t.text :plane
-      t.text :seats, array: true, default: []
 
       t.timestamps
     end

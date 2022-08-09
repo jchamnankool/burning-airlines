@@ -20,27 +20,11 @@ Using *24B* as an example of a seat number, this indicates a seat in the **24th 
 * `to:text`
 * `from:text`
 * `plane:text`
-* `seats:text`
 ```shell
-~airlines-server$ rails g scaffold Flight name:text date:date to:text from:text plane:text seats:text
+~airlines-server$ rails g scaffold Flight name:text date:date to:text from:text plane:text
 ```
 Even though flight numbers and planes are given numbers as names (i.e. 747), we are not performing any mathematical operations on them, so it's fine to keep them stored as text.
 
-`seats` will be a column for an array of objects, structured like so:
-```rb
-seats = [
-    {
-        name: "24B",
-        user: undefined
-    },
-    {
-        name: "14A",
-        user: 22 # this is their ID, but we can also store email instead
-    },
-    ...
-]
-```
-The length of the `seats` array will determine how many available seats there are on the plane to begin with. Whether or not the `user` attribute is undefined will determine the *availability* of the seat itself. The seat name will be generated based on the rows and columns of the associated plane as they are pushed into the `seats` array.
 ### User
 * `email:text`
 * `password_digest:string`
@@ -52,9 +36,10 @@ Note that the admin boolean must have a default value of `false`.
 ### Reservation
 * `user_id:integer`
 * `flight_id:integer`
-* `seat:text`
+* `row:integer`
+* `col:integer`
 ```shell
-~airlines-server$ rails g scaffold Reservation user_id:integer flight_id:integer seat:text
+~airlines-server$ rails g scaffold Reservation user_id:integer flight_id:integer row:integer col:integer
 ```
 `Reservation` will act as both a model and a join table between users and flights.
 
@@ -73,3 +58,20 @@ class User ApplicationRecord
     has_many :flights, :through => :reservations
 end
 ```
+
+## For the front end
+`seats` can have a column for an array of objects, structured like so:
+```rb
+seats = [
+    {
+        name: "24B",
+        user: undefined
+    },
+    {
+        name: "14A",
+        user: 22 # this is their ID, but we can also store email instead
+    },
+    ...
+]
+```
+The length of the `seats` array will determine how many available seats there are on the plane to begin with. Whether or not the `user` attribute is undefined will determine the *availability* of the seat itself. The seat name will be generated based on the rows and columns of the associated plane as they are pushed into the `seats` array.
