@@ -11,8 +11,13 @@
 </p>
 
 <p>
-  <strong>Seat:</strong>
-  <%= @reservation.seat %>
+  <strong>Row:</strong>
+  <%= @reservation.row %>
+</p>
+
+<p>
+  <strong>Col:</strong>
+  <%= @reservation.col %>
 </p>
 
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
