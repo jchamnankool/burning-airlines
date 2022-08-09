@@ -1,12 +1,4 @@
 # Setup for Burning Airlines backend
-## Established associations
-### 1:many
-* User:Reservation
-* Flight:Reservation
-* Airplane:Flight
-### many:many
-* User:Flights (through Reservation)
-
 ## Creating the Rails server
 ```shell
 $ rails new airlines-server -d postgresql
@@ -64,22 +56,17 @@ Note that the admin boolean must have a default value of `false`.
 ```shell
 ~airlines-server$ rails g scaffold Reservation user_id:integer flight_id:integer seat:text
 ```
-Remember to turn off the `id` column of a join table by adding `:id => false do |t|` to the `CreateReservations` migration file like so:
-```rb
-class CreateReservations < ActiveRecord::Migration[5.2]
-  def change
-    create_table :reservations, :id => false do |t|
-      t.integer :user_id
-      t.integer :flight_id
-      t.text :seat
+`Reservation` will act as both a model and a join table between users and flights.
 
-      t.timestamps
-    end
-  end
-end
-```
-#### Connecting through one table in between
-Because users have many reservations, they can have many flights through reservations.
+## Established associations
+### 1:many
+* **User:Reservation**
+* **Flight:Reservation**
+* **Airplane:Flight**
+### many:many
+* **User:Flights** (through Reservation)
+
+Because users have many reservations, they have many flights through reservations.
 ```rb
 class User ApplicationRecord
     has_many :reservations
