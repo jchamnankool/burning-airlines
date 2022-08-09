@@ -64,7 +64,20 @@ Note that the admin boolean must have a default value of `false`.
 ```shell
 ~airlines-server$ rails g scaffold Reservation user_id:integer flight_id:integer seat:text
 ```
-Remember to turn off the `id` column of a join table by adding `:id => false do |t|`.
+Remember to turn off the `id` column of a join table by adding `:id => false do |t|` to the `CreateReservations` migration file like so:
+```rb
+class CreateReservations < ActiveRecord::Migration[5.2]
+  def change
+    create_table :reservations, :id => false do |t|
+      t.integer :user_id
+      t.integer :flight_id
+      t.text :seat
+
+      t.timestamps
+    end
+  end
+end
+```
 #### Connecting through one table in between
 Because users have many reservations, they can have many flights through reservations.
 ```rb
