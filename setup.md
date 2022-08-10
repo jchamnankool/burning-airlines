@@ -75,3 +75,6 @@ seats = [
 ]
 ```
 The length of the `seats` array will determine how many available seats there are on the plane to begin with. Whether or not the `user` attribute is undefined will determine the *availability* of the seat itself. The seat name will be generated based on the rows and columns of the associated plane as they are pushed into the `seats` array.
+
+## Resources
+* [Rails API User Authenticationin React](https://dev.to/diiiiana99/connecting-javascript-react-and-ruby-on-rails-user-authentication-and-authorization-2le3)
