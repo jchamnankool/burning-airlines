@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :flights
   resources :airplanes
-  get "/login" => "session#new"
-  post "/login" => "session#create"
-  delete "/login" => "session#destroy"
+  resources :sessions, only: [:create]
+  delete :logout, to: "sessions#logout"
+  get :logged_in, to: "sessions#logged_in"
 end
