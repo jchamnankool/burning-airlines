@@ -15,6 +15,10 @@ class FlightsController < ApplicationController
     @flight = Flight.new
   end
 
+  #SEARCH 
+  #new controller that accepts a from a that takes a from and a to that it will use to query that the data
+  
+
   # GET /flights/1/edit
   def edit
   end
