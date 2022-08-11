@@ -19,7 +19,7 @@ f1 = Flight.create :name => "32", :date => DateTime.new(2022, 9, 22), :to => "JF
 f2 = Flight.create :name => "63", :date => DateTime.new(2022, 10, 14), :to => "LAX", :from => "CDG", :plane => "757"
 puts "#{Flight.count} flights created."
 
-# Reservation.destroy_all
+Reservation.destroy_all
 # puts "Creating reservations..."
 # r1 = Reservation.create :user_id => 2, :flight_id => 2, :row => 12, :col => 3
 # puts "#{Reservation.count} reservations created."
