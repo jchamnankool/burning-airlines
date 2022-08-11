@@ -15,6 +15,25 @@ class FlightsController < ApplicationController
     @flight = Flight.new
   end
 
+  #SEARCH 
+  #new controller that accepts a from a that takes a from and a to that it will use to query that the data
+  def search
+    @all_flights = Flight.all
+    origin = params[:from].upcase
+    destination = params[:to].upcase
+    @filtered_flights = []
+    @all_flights.each do |flight|
+      if flight.from == origin && flight.to == destination
+        @filtered_flights << flight
+      end
+    end
+
+    respond_to do |format|
+      format.json{render json: @filtered_flights}
+    end
+  end
+  
+
   # GET /flights/1/edit
   def edit
   end
